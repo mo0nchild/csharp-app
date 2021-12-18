@@ -19,7 +19,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
         public void doshit() 
         {
-            this.ID++;
+            this.ID+=8;
             SendEvent(this.ID);
         }
 
