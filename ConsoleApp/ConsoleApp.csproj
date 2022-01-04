@@ -6,5 +6,8 @@
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyLib\MyLib.csproj" />
+  </ItemGroup>
 
 </Project>
