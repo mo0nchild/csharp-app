@@ -4,7 +4,6 @@ class Messenger<T> where T : Message
 {
     public static void SendMessage(T msg) => Console.WriteLine(msg.MessageText);
 }
-
 abstract class Message
 {
     public string MessageText { get; init; }
@@ -29,6 +28,8 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        Messenger<EmailMessage>.SendMessage(new EmailMessage("Hello, From Program", "test@gmail.com"));
+        Console.Write("Input message: ");
+        string? msg = Console.ReadLine();
+        Messenger<EmailMessage>.SendMessage(new EmailMessage($"Hello, {msg}", "test@gmail.com"));
     }
 }
