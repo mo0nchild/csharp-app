@@ -1,80 +1,34 @@
 ﻿namespace MyProgram;
-abstract class Person
+
+class Messenger<T> where T : Message
 {
-    protected uint age;
-    public uint Age 
-    {
-        get => this.age;
-        set 
-        {
-            if ((age = value) >= 100) this.IsDead = true;        
-        }
-    }
-    public string Name { get; init; }
-    public bool IsDead { get; private set; } = false;
-    public Person(string name = "none", uint age = 0) 
-    {
-        this.Name = name;
-        this.Age = age;
-    }
-
-    public virtual void Print() 
-    {
-        Console.WriteLine($"{Name}\t{Age}");
-    }
-
-    public abstract void Move();
-
+    public static void SendMessage(T msg) => Console.WriteLine(msg.MessageText);
 }
 
-class Client : Person
+abstract class Message
 {
-    private static uint counter = 0;
-    public uint Id { get; set; } = 0;
-    public Client(string name, uint age) 
-        : base(name, age)
-    {
-        this.Id = ++counter;
-    }
-
-    public override sealed void Move()
-    {
-        Console.WriteLine("Walking");
-    }
-
-    public sealed override void Print()
-    {
-        base.Print();
-        Console.WriteLine($"Id: {Id}");
-    }
+    public string MessageText { get; init; }
+    public Message(string text) => MessageText = text;
 }
 
-class Premium : Client 
+class SmsMessage : Message
 {
-    public Premium(string name, uint age) 
-        : base(name, age)
-    { }
-
+    public uint PhoneNumber { get; init; }
+    public SmsMessage(string msg, uint number)
+        : base(msg) => PhoneNumber = number;
 }
 
-class Admin : Person 
+class EmailMessage : Message 
 {
-    public override void Move() => Console.WriteLine("Running");
-    public Admin(string name, uint age) 
-        : base(name, age)
-    { }
-    public override string ToString() => $"{Name}\t{Age}";
+    public string Email { get; init; }
+    public EmailMessage(string msg, string email)
+        : base(msg) => Email = email;
 }
 
 public class Program
 {
     public static void Main(string[] args)
     {
-        var shit = new Admin("123123", 12);
-        var shit2 = new Admin("123123", 12);
-        Console.WriteLine(shit.Equals(shit2));
-
-        Premium mike = new("Mike", 32);
-        if (mike is Person mike_person) Console.WriteLine(mike_person.Name);
+        Messenger<EmailMessage>.SendMessage(new EmailMessage("Hello, From Program", "test@gmail.com"));
     }
 }
