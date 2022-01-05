@@ -1,6 +1,5 @@
 ﻿namespace MyProgram;
-
-class Person
+abstract class Person
 {
     protected uint age;
     public uint Age 
@@ -18,30 +17,64 @@ class Person
         this.Name = name;
         this.Age = age;
     }
+
+    public virtual void Print() 
+    {
+        Console.WriteLine($"{Name}\t{Age}");
+    }
+
+    public abstract void Move();
+
 }
 
 class Client : Person
 {
     private static uint counter = 0;
     public uint Id { get; set; } = 0;
-    public Client(string name, uint age) : base(name, age)
+    public Client(string name, uint age) 
+        : base(name, age)
     {
         this.Id = ++counter;
     }
+
+    public override sealed void Move()
+    {
+        Console.WriteLine("Walking");
+    }
+
+    public sealed override void Print()
+    {
+        base.Print();
+        Console.WriteLine($"Id: {Id}");
+    }
+}
+
+class Premium : Client 
+{
+    public Premium(string name, uint age) 
+        : base(name, age)
+    { }
+
 }
 
 class Admin : Person 
 {
-    public Admin(string name, uint age) : base(name, age)
+    public override void Move() => Console.WriteLine("Running");
+    public Admin(string name, uint age) 
+        : base(name, age)
     { }
+    public override string ToString() => $"{Name}\t{Age}";
 }
 
 public class Program
 {
-    
     public static void Main(string[] args)
     {
-        Client mike = new("Mike", 32);
+        var shit = new Admin("123123", 12);
+        var shit2 = new Admin("123123", 12);
+        Console.WriteLine(shit.Equals(shit2));
+
+        Premium mike = new("Mike", 32);
         if (mike is Person mike_person) Console.WriteLine(mike_person.Name);
     }
 }
