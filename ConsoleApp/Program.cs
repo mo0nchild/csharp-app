@@ -1,4 +1,6 @@
-﻿namespace MyProgram;
+﻿using MyLib;
+
+namespace MyProgram;
 
 class Messenger<T> where T : Message
 {
@@ -33,7 +35,7 @@ public class Program
         {
             throw new TestException("Exception Message", "Value");
         }
-        catch (TestException e) 
+        catch (TestException e)
         {
             Console.WriteLine($"{e.Value}");
         }
@@ -41,10 +43,21 @@ public class Program
         {
             Console.WriteLine($"m=0\t{e.Message}");
         }
+        finally 
+        {
+            Console.WriteLine("end game");
+        }
     }
     public static void Main(string[] args)
     {
-        Check(0);
+        var person = new User("Mike", 18);
+        person.UserAction += delegate (User u, UserMessage e)
+        {
+            Console.WriteLine($"{u.Name}\t->\t{e.Text}");
+        };
+
+        person.UserMoving();
+        Console.WriteLine(person.Calculate(123, 123));
 
         /*Console.Write("Input message: ");
         string? msg = Console.ReadLine();
