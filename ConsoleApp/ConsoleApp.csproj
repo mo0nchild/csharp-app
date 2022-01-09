@@ -6,11 +6,6 @@
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="MyLib">
-      <HintPath>..\MyLib\obj\Debug\net6.0\MyLib.dll</HintPath>
-    </Reference>
-  </ItemGroup>
 
 </Project>
     
