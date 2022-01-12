@@ -1,9 +1,6 @@
 ﻿namespace MyProgram;
 using static Console;
 
-using System.Collections;
-using System.Collections.Generic;
-
 class Company : IEnumerable<Person>
 {
     Person[] people;
