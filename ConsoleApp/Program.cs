@@ -102,6 +102,7 @@ public class Program
         });
 
         foreach (var person in facebook) WriteLine($"{person.Name}\t->\t{person.Id}");
+        foreach (var person in facebook.GetEnum()) WriteLine($"{person.Name}\t->\t{person.Id}");
     }
 
 }
